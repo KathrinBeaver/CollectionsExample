@@ -7,8 +7,7 @@ import java.util.Comparator;
 /**
  * @author Beaver
  */
-public class WordDateComparator
-        implements Comparator<Word> {
+public class WordDateComparator implements Comparator<Word> {
 
     @Override
     public int compare(Word w1, Word w2) {

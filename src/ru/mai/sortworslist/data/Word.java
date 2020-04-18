@@ -3,6 +3,8 @@ package ru.mai.sortworslist.data;
 import java.util.Date;
 import java.util.Objects;
 
+// стол стул стена слово стул и еще один стол
+
 /**
  * @author Beaver
  */

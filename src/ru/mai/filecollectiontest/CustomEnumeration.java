@@ -28,7 +28,7 @@ public class CustomEnumeration implements Iterator {
 
     @Override
     public Object next() {
-        return new Integer(values[current++]);
+        return Integer.valueOf(values[current++]);
     }
 
     @Override

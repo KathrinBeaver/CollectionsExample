@@ -15,23 +15,34 @@ public class Main {
     public static void main(String[] args) {
 
         listExample();
-//        customEnumerationExample();
-//        sortNumberString();
-//        sortWordsList();
-//        mapExample();
+        customEnumerationExample();
+        sortNumberString();
+        sortWordsList();
+        mapExample();
     }
 
     private static void listExample() {
-        ArrayList<String> list = new ArrayList<>();
+        ArrayList<Integer> list = new ArrayList<>();
 
         for (int i = 0; i < 10; i++) {
-            list.add(String.valueOf(i * i));
+//            list.add(String.valueOf(i * i));
+            list.add(i * i);
         }
 
         System.out.println(list);
         list.remove(2);
+
         System.out.println(list);
-        list.remove("49");
+        list.remove(Integer.valueOf(49));
+
+        ArrayList<ArrayList<Integer>> matrix = new ArrayList<ArrayList<Integer>>();
+
+        for(int i = 0; i < list.size(); i++) {
+//        for(Integer num : list) {
+//            list.remove(num);
+            list.remove(list.get(i));
+        }
+
         System.out.println(list);
     }
 
@@ -47,9 +58,11 @@ public class Main {
 
         CustomEnumeration enumeration = new CustomEnumeration(values);
 
-        if (enumeration.hasNext()) {
+       if (enumeration.hasNext()) {
             enumeration.remove();
         }
+
+       enumeration.remove();
 
         while (enumeration.hasNext()) {
             System.out.println(enumeration.next());
@@ -57,13 +70,15 @@ public class Main {
     }
 
     private static void sortNumberString() {
-        //ArrayList<int> list = new ArrayList<>();
+//        ArrayList<char> list = new ArrayList<>();
         ArrayList<Integer> list1 = new ArrayList<>(Arrays.asList(1, 22, -3, 40, 5));
 
         ArrayList<String> list2 = new ArrayList<>();
         list2.add("111");
         list2.add("222");
         list2.add("333");
+
+        // 1 2 4 5 6 10 11 20 30 50
 
         // Java 9 and newer
         List<String> strings = new ArrayList<>(List.of("Hello", "world"));
@@ -73,11 +88,14 @@ public class Main {
         List<Integer> emptyList = Collections.emptyList();
         //emptyList.add(1);
 
+        Collections.sort(list1);
+
         List<Integer> sortedList = list1.stream()
                 .sorted()
 //                .sorted(Comparator.naturalOrder())
 //                .sorted(Comparator.reverseOrder())
                 .collect(Collectors.toList());
+
         sortedList.forEach(System.out::println);
     }
 
@@ -90,8 +108,8 @@ public class Main {
         list.add(new Word("слово3", 3));
         list.add(new Word("слово4", 2));
 
-        String test = "слово2 ";
-        //String test = "слово2 ".trim();
+//        String test = "слово2      ";
+        String test = "слово2 ".trim();
         Word testWord = new Word(test, 1);
 
         if (list.contains(testWord)) {
@@ -106,7 +124,7 @@ public class Main {
 
         System.out.println("1 sort: ");
         Collections.sort(list);
-        //list.sort();
+        list.sort(new WordDateComparator());
 
         for (Word list1 : list) {
             System.out.println(list1);
@@ -128,6 +146,8 @@ public class Main {
             System.out.println(list1);
         }
 
+        list.add(new Word("ааааааа", 1));
+
         System.out.println();
         System.out.println("4 sort: ");
         Collections.sort(list, new WordDictionaryComparator());
@@ -136,6 +156,8 @@ public class Main {
             System.out.println(list1);
         }
 
+        System.out.println();
+        System.out.println("5 sort: ");
         List<Word> sortedList = list.stream()
                 .sorted(Comparator.comparing(Word::getWord))
                 .collect(Collectors.toList());

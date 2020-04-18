@@ -23,12 +23,13 @@ public class MapExample {
         hashMap.put("Война и мир", "Толстой");
         hashMap.put("Отцы и дети", "Тургенев");
         hashMap.put("Обломов", "Гончаров");
-        hashMap.put("Мы", "Замятин1");
+        hashMap.put("Мы", null);
         hashMap.put("Мы", "Замятин");
     }
 
     public void getBooksList() {
         for (int i = 0; i < books.size(); i++) {
+
             if (hashMap.containsKey(books.get(i))) {
                 System.out.println("Автор" + (i + 1) + ":\t"
                         + hashMap.get(books.get(i)) +
