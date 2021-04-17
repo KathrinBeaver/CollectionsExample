@@ -13,37 +13,39 @@ import java.util.stream.Collectors;
 public class Main {
 
     public static void main(String[] args) {
-
         listExample();
         customEnumerationExample();
         sortNumberString();
         sortWordsList();
-        mapExample();
+//        mapExample();
     }
 
     private static void listExample() {
-        ArrayList<Integer> list = new ArrayList<>();
+        ArrayList<Integer> list1 = new ArrayList<>();
+        ArrayList list2 = new ArrayList<>();
 
         for (int i = 0; i < 10; i++) {
-//            list.add(String.valueOf(i * i));
-            list.add(i * i);
+            list1.add(i * i);
+            list2.add(String.valueOf(i * i));
         }
 
-        System.out.println(list);
-        list.remove(2);
+        System.out.println(list1);
+        System.out.println(list2);
 
-        System.out.println(list);
-        list.remove(Integer.valueOf(49));
+        list1.remove(2);
+
+        System.out.println(list1);
+        list1.remove(Integer.valueOf(49));
+
+        for(int i = 0; i < list1.size(); i++) {
+//        for(Integer num : list1) {
+//            list1.remove(num);
+            list1.remove(list1.get(i));
+        }
+
+        System.out.println(list1);
 
         ArrayList<ArrayList<Integer>> matrix = new ArrayList<ArrayList<Integer>>();
-
-        for(int i = 0; i < list.size(); i++) {
-//        for(Integer num : list) {
-//            list.remove(num);
-            list.remove(list.get(i));
-        }
-
-        System.out.println(list);
     }
 
     private static void customEnumerationExample() {
@@ -58,11 +60,11 @@ public class Main {
 
         CustomEnumeration enumeration = new CustomEnumeration(values);
 
-       if (enumeration.hasNext()) {
+        if (enumeration.hasNext()) {
             enumeration.remove();
         }
 
-       enumeration.remove();
+        enumeration.remove();
 
         while (enumeration.hasNext()) {
             System.out.println(enumeration.next());
@@ -114,11 +116,11 @@ public class Main {
 
         if (list.contains(testWord)) {
             int index = list.indexOf(testWord);
-            System.out.println("слово существует, id = " + index);
+            System.out.println("Слово существует, id = " + index);
             long count = list.get(index).getCount();
             list.get(index).setCount(count + 1);
         } else {
-            System.out.println("слово не существует");
+            System.out.println("Слово не существует");
             list.add(testWord);
         }
 
