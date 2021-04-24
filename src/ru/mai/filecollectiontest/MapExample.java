@@ -20,6 +20,12 @@ public class MapExample {
     }
 
     public void mapAuthors() {
+
+//        String book = "111";
+//        String author = "222";
+//
+//        hashMap.put(book, author);
+
         hashMap.put("Война и мир", "Толстой");
         hashMap.put("Отцы и дети", "Тургенев");
         hashMap.put("Обломов", "Гончаров");
@@ -28,6 +34,7 @@ public class MapExample {
     }
 
     public void getBooksList() {
+
         for (int i = 0; i < books.size(); i++) {
 
             if (hashMap.containsKey(books.get(i))) {

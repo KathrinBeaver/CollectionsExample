@@ -13,15 +13,44 @@ import java.util.stream.Collectors;
 public class Main {
 
     public static void main(String[] args) {
-        listExample();
-        customEnumerationExample();
-        sortNumberString();
-        sortWordsList();
-//        mapExample();
+//        listExample();
+//        customEnumerationExample();
+//        sortNumberString();
+//        sortWordsList();
+
+//        List<String> words = calculateWordsCount("стол стул стена слово стул и еще один стол");
+//        words.stream()
+//                .forEach(System.out::println);
+//
+//        System.out.println("\n\n");
+//
+//        Set<String> wordsSet = calculateWordsCountSet("стол стул стена слово стул и еще один стол");
+//        wordsSet.stream()
+//                .forEach(System.out::println);
+
+        List<Word> words = calculateWordsCountWordsList("стол стул стена слово стул и еще один стол");
+        words.stream()
+                .forEach(System.out::println);
+
+        System.out.println("\n\n");
+
+        Set<Word> wordsSet = calculateWordsCountWordsSet("стол стул стена слово стул и еще один стол");
+        wordsSet.stream()
+                .forEach(System.out::println);
+
+//        for(String word : words) {
+//             System.out.println(word);
+//        }
+
+//        for(int i = 0; i < words.size(); i++) {
+//            System.out.println(words.get(i));
+//        }
+
+         mapExample();
     }
 
     private static void listExample() {
-        ArrayList<Integer> list1 = new ArrayList<>();
+        List<Integer> list1 = new ArrayList<>();
         ArrayList list2 = new ArrayList<>();
 
         for (int i = 0; i < 10; i++) {
@@ -37,7 +66,7 @@ public class Main {
         System.out.println(list1);
         list1.remove(Integer.valueOf(49));
 
-        for(int i = 0; i < list1.size(); i++) {
+        for (int i = 0; i < list1.size(); i++) {
 //        for(Integer num : list1) {
 //            list1.remove(num);
             list1.remove(list1.get(i));
@@ -45,7 +74,8 @@ public class Main {
 
         System.out.println(list1);
 
-        ArrayList<ArrayList<Integer>> matrix = new ArrayList<ArrayList<Integer>>();
+        ArrayList<ArrayList<Integer>> matrix =
+                new ArrayList<ArrayList<Integer>>();
     }
 
     private static void customEnumerationExample() {
@@ -88,14 +118,14 @@ public class Main {
         Collections.binarySearch(list1, 2);
 
         List<Integer> emptyList = Collections.emptyList();
-        //emptyList.add(1);
+//        emptyList.add(1);
 
         Collections.sort(list1);
 
         List<Integer> sortedList = list1.stream()
                 .sorted()
 //                .sorted(Comparator.naturalOrder())
-//                .sorted(Comparator.reverseOrder())
+                .sorted(Comparator.reverseOrder())
                 .collect(Collectors.toList());
 
         sortedList.forEach(System.out::println);
@@ -110,8 +140,8 @@ public class Main {
         list.add(new Word("слово3", 3));
         list.add(new Word("слово4", 2));
 
-//        String test = "слово2      ";
-        String test = "слово2 ".trim();
+        String test = "слово2      ";
+//        String test = "слово2 ".trim();
         Word testWord = new Word(test, 1);
 
         if (list.contains(testWord)) {
@@ -144,6 +174,19 @@ public class Main {
         System.out.println("3 sort: ");
         Collections.sort(list, new WordDateComparator());
 
+        Collections.sort(list, new Comparator<Word>() {
+
+            @Override
+            public int compare(Word o1, Word o2) {
+                return 0;
+            }
+
+            @Override
+            public boolean equals(Object obj) {
+                return false;
+            }
+        });
+
         for (Word list1 : list) {
             System.out.println(list1);
         }
@@ -167,10 +210,83 @@ public class Main {
         sortedList.forEach(System.out::println);
     }
 
+    // стол стул стена слово стул и еще один стол
+    /*
+     стол 2
+     стул 2
+     стена 1
+     слово 1
+     и 1
+     еще 1
+     один 1
+
+     стол
+     стул
+     стена
+     слово
+     и
+     еще
+     один
+
+     */
+
+    private static List<String> calculateWordsCount(String text) {
+        String[] allWords = text.split("\\s");
+        List<String> words = new ArrayList();
+        for (String word: allWords) {
+            if (!words.contains(word)) {
+                words.add(word);
+            }
+        }
+        return words;
+    }
+
+    private static List<Word> calculateWordsCountWordsList(String text) {
+        String[] allWords = text.split("\\s");
+        List<Word> words = new ArrayList<Word>();
+        for (String word: allWords) {
+            Word wrd = new Word(word);
+            if (!words.contains(wrd)) {
+                words.add(wrd);
+            } else {
+                words.get(words.indexOf(wrd))
+                        .setCount(words.get(words.indexOf(wrd)).getCount() + 1);
+            }
+        }
+        return words;
+    }
+
+    private static Set<Word> calculateWordsCountWordsSet(String text) {
+        String[] allWords = text.split("\\s");
+        Set<Word> words = new HashSet<Word>();
+        for (String word: allWords) {
+            words.add(new Word(word));
+        }
+        return words;
+    }
+
+    private static Set<String> calculateWordsCountSet(String text) {
+        String[] allWords = text.split("\\s");
+        Set<String> words = new HashSet<>();
+        for (String word: allWords) {
+            words.add(word);
+        }
+        return words;
+    }
+
     private static void mapExample() {
         MapExample mapTest = new MapExample();
         mapTest.fillBooksList();
         mapTest.mapAuthors();
         mapTest.getBooksList();
     }
+
+    /**
+     * Арбуз - это .... знач. 1
+     *       - это ... знач. 1
+     * Абажур - .....
+     *
+     *
+     *
+     */
 }

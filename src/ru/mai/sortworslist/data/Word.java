@@ -4,6 +4,16 @@ import java.util.Date;
 import java.util.Objects;
 
 // стол стул стена слово стул и еще один стол
+/*
+ стол 2
+ стул 2
+ стена 1
+ слово 1
+ и 1
+ еще 1
+ один 1
+
+ */
 
 /**
  * @author Beaver
@@ -17,6 +27,12 @@ public class Word implements Comparable<Word> {
     public Word(String word, long count) {
         this.word = word;
         this.count = count;
+        date = new Date();
+    }
+
+    public Word(String word) {
+        this.word = word;
+        this.count = 1;
         date = new Date();
     }
 
@@ -43,6 +59,7 @@ public class Word implements Comparable<Word> {
 
     @Override
     public int hashCode() {
+//        return this.word.hashCode();
         int hash = 7;
         hash = 59 * hash + Objects.hashCode(this.word);
         return hash;
